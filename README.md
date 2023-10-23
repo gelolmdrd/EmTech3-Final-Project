@@ -1,7 +1,7 @@
 # Emerging Tech 3 in CPE Final Project
 
-CPE 026 - CPE41S4 <br>
-URANUS-7
+**CPE 026 - CPE41S4** <br>
+**URANUS-7**
 
 This README provides instructions on how to initialize an Expo app and install the necessary dependencies for your project. Expo is a powerful tool that streamlines the development process for creating mobile apps using React Native.
 
@@ -101,7 +101,11 @@ To collaborate with other developers and manage your project using Git, you can 
   After making changes to your project, commit those changes with a descriptive message:
 
   ```bash
-  git add .
+  git add . # To stage all files
+  # or
+  git add "filename" # To stage specific files
+
+  # then
   git commit -m "Your descriptive commit message"
   ```
 
@@ -127,7 +131,7 @@ To collaborate with other developers and manage your project using Git, you can 
 
   ```bash
   git push origin <branch-name>
-  or
+  # or
   git push
   ```
 
