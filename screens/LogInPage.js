@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const LogInPage = ({ navigation }) => {
   const goToGettingStarted = () => {
@@ -12,9 +20,9 @@ const LogInPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.navigationBar}>
-        <Text style={styles.subtitle} onPress={goToGettingStarted}>
-          x
-        </Text>
+        <TouchableOpacity style={styles.subtitle} onPress={goToGettingStarted}>
+          <Icon name="close" size={20} color="#BDBDBD" />
+        </TouchableOpacity>
         <Text style={styles.title}>Log In</Text>
         <Text style={styles.subtitleLinks} onPress={goToSignUp}>
           Sign Up
@@ -29,13 +37,12 @@ const LogInPage = ({ navigation }) => {
             placeholder="Password"
           />
 
-          <View style={styles.passwordLinkContainer}>
-            <Text style={styles.subtitleLinks}>Forgot your Password?</Text>
-          </View>
-
           <Pressable style={styles.logInButton}>
             <Text style={styles.buttonText}>Log in</Text>
           </Pressable>
+          <View style={styles.passwordLinkContainer}>
+            <Text style={styles.subtitleLinks}>Forgot your Password?</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -55,42 +62,46 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 24,
+    backgroundColor: "#fff",
+    zIndex: 1,
   },
   frame: {
     flex: 1,
     position: "relative",
-    paddingHorizontal: 24,
-    paddingBottom: 48,
+    paddingHorizontal: 40,
+    paddingTop: 20,
+    paddingBottom: 100, // Adjust the paddingBottom to provide space for the button
   },
   fillOut: {
     flex: 1,
     justifyContent: "center",
     alignContent: "center",
-    paddingBottom: 64,
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     color: "black",
     position: "absolute",
-    right: "45%",
-    justifyContent: "center",
-    alignItems: "center",
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    zIndex: -1,
   },
   input: {
     width: "100%",
-    height: 60,
+    height: 50,
     borderColor: "#ccc",
     color: "black",
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 14,
     marginBottom: 15,
-    fontSize: 16,
+    fontSize: 14,
+    backgroundColor: "#F6F6F6",
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
   },
   subtitle: {
@@ -105,21 +116,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   logInButton: {
-    borderRadius: 24,
     backgroundColor: "#93867F",
-    padding: 16,
-    borderRadius: 30,
+    paddingVertical: 12,
+    borderRadius: 40,
+    marginTop: 20,
     alignItems: "center",
-  },
-  logInWithContainer: {
-    alignItems: "center",
-    paddingBottom: 40,
   },
   passwordLinkContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 25,
-    padding: 8,
+    marginTop: 15,
   },
 });
 

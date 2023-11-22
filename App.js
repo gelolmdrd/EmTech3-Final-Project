@@ -7,6 +7,7 @@ import StartupPage from "./screens/StartupPage";
 import GettingStartedPage from "./screens/GettingStartedPage";
 import LogInPage from "./screens/LogInPage";
 import SignUpPage from "./screens/SignUpPage";
+import HomePage from "./screens/HomePage";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,11 @@ const App = () => {
         <Stack.Screen
           name="SignUp"
           component={SignUpPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

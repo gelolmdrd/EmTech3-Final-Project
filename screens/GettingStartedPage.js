@@ -1,55 +1,89 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Image,
   StyleSheet,
   StatusBar,
   Text,
+  ScrollView,
   Pressable,
+  Dimensions,
 } from "react-native";
-import StartupLogo from "../assets/StartupLogo.png";
 import GettingStartedInfo from "../components/GettingStartedInfo";
+import SignUpPage from "./SignUpPage";
+import * as Font from "expo-font";
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Inter: require("../assets/fonts/Inter-Regular.ttf"),
+  });
+};
 
 const GettingStartedPage = ({ navigation }) => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const scrollViewRef = useRef(null);
+
+  useEffect(() => {
+    const loadApp = async () => {
+      await loadFonts();
+      setFontsLoaded(true);
+    };
+
+    loadApp();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const goToSignUp = () => {
     navigation.navigate("SignUp");
   };
-  const goToLogIn = () => {
-    navigation.navigate("LogIn");
-  };
 
-  // Define your image data for the carousel
-  const carouselData = [
-    { image: require("./../assets/gettingStarted1.png") },
-    { image: require("./../assets/gettingStarted2.png") },
-    { image: require("./../assets/gettingStarted3.png") },
+  const instructions = [
+    {
+      text: "Get tailored skin care routines",
+      subtext: "Personalized recommendations just for you",
+      image: require("../assets/info1.png"),
+    },
+    {
+      text: "Analyze skin conditions using our built-in AI",
+      subtext: "Cutting-edge technology for accurate analysis",
+      image: require("../assets/info2.png"),
+    },
+    {
+      text: "Get personalized daily skin care tips",
+      subtext: "Receive tips to keep your skin healthy every day",
+      image: require("../assets/info3.png"),
+    },
   ];
+
+  const screenWidth = Dimensions.get("window").width;
 
   return (
     <View style={styles.container}>
-      <View style={styles.appLogo}>
-        <Image source={StartupLogo} style={styles.logo} resizeMode="contain" />
-      </View>
-      <View style={styles.gettingStartedContainer}>
-        <Image
-          source={require("./../assets/gettingStarted1.png")}
-          style={styles.img}
-          resizeMode="contain"
-        />
-      </View>
-      <View style={styles.navigationsContainer}>
-        <Pressable style={styles.button} onPress={goToSignUp}>
-          <Text style={styles.buttonText}>Get Started!</Text>
-        </Pressable>
-        <View style={styles.alreadyHaveAccountText}>
-          <Text style={styles.text}> Already have an account? </Text>
-          <Text style={styles.loginText} onPress={goToLogIn}>
-            Log in
-          </Text>
-        </View>
-      </View>
-
       <StatusBar backgroundColor="#CCC" barStyle="light-content" />
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        {instructions.map((item, index) => (
+          <GettingStartedInfo
+            key={index}
+            instruction={item.text}
+            subtext={item.subtext}
+            image={item.image}
+            screenWidth={screenWidth}
+            textStyle={styles.instructionText} // Pass additional style
+            subtextStyle={styles.subtext} // Pass subtext style
+          />
+        ))}
+      </ScrollView>
+
+      <Pressable style={styles.getStartedButton} onPress={goToSignUp}>
+        <Text style={styles.buttonText}>Get Started</Text>
+      </Pressable>
     </View>
   );
 };
@@ -57,71 +91,39 @@ const GettingStartedPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: "white",
-    justifyContent: "center",
+    backgroundColor: "#fff",
     alignItems: "center",
-    padding: 24,
-  },
-  appLogo: {
-    flex: 1,
-    maxHeight: "10%",
-    width: "100%",
     justifyContent: "center",
+  },
+  scrollContainer: {
     alignItems: "center",
-    padding: 24,
   },
-  logo: {
-    width: 90, // Adjust the width and height to fit your logo size
-    maxHeight: 90,
+  instructionText: {
+    fontFamily: "Inter",
+    fontSize: 32,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#333",
   },
-  gettingStartedContainer: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    paddingVertical: 36,
-  },
-  img: {},
-  gettingStartedInfo: {
-    justifyContent: "center",
-    alignItems: "center",
-    maxHeight: "100%",
-  },
-  button: {
+  getStartedButton: {
+    width: 250,
     borderRadius: 24,
     backgroundColor: "#93867F",
-    alignItems: "center",
     padding: 16,
-    width: "80%",
+    borderRadius: 30,
+    alignItems: "center",
+    bottom: 80,
   },
   buttonText: {
+    color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-    color: "#FFF",
   },
-  alreadyHaveAccountText: {
-    flex: 1,
-    flexDirection: "row",
-  },
-  text: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#DEC1FF",
-  },
-  loginText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#7D70BA",
-  },
-  navigationsContainer: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    maxHeight: "20%",
-    width: "100%",
+  scrollIndicatorContainer: {
+    position: "absolute",
+    bottom: 180,
+    backgroundColor: "blue",
+    zIndex: 1,
   },
 });
 
