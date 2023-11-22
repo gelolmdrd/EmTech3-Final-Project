@@ -10,12 +10,10 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const LogInPage = ({ navigation }) => {
-  const goToGettingStarted = () => {
-    navigation.navigate("GettingStarted");
-  };
-  const goToSignUp = () => {
-    navigation.navigate("SignUp");
-  };
+  const goToGettingStarted = () => navigation.navigate("GettingStarted");
+  const goToSignUp = () => navigation.navigate("SignUp");
+
+  const goToHome = () => navigation.navigate("Home");
 
   return (
     <View style={styles.container}>
@@ -38,7 +36,9 @@ const LogInPage = ({ navigation }) => {
           />
 
           <Pressable style={styles.logInButton}>
-            <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText} onPress={goToHome}>
+              Log in
+            </Text>
           </Pressable>
           <View style={styles.passwordLinkContainer}>
             <Text style={styles.subtitleLinks}>Forgot your Password?</Text>
