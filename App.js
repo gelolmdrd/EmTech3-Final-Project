@@ -8,6 +8,7 @@ import GettingStartedPage from "./screens/GettingStartedPage";
 import LogInPage from "./screens/LogInPage";
 import SignUpPage from "./screens/SignUpPage";
 import EmptyPage from "./screens/Empty";
+import HomePage from "./screens/HomePage";
 
 const Stack = createStackNavigator();
 
@@ -37,7 +38,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Home"
-          component={EmptyPage}
+          component={HomePage}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
