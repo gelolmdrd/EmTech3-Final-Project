@@ -58,7 +58,10 @@ const HomePage = ({ navigation }) => {
               source={require("../assets/Blackheads-button.png")}
               style={styles.skinButton}
             />
-            <Text style={styles.recommenderText}>Lorem Ipsum </Text>
+            <Text style={styles.recommenderText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.skinProblemButtons}>
             <Image
@@ -90,7 +93,7 @@ const HomePage = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.skinProblemButtons}>
             <Image
-              source={require("../assets/Whitehead-button.png")}
+              source={require("../assets/Whiteheads-button.png")}
               style={styles.skinButton}
             />
             <Text style={styles.recommenderText}>Lorem Ipsum </Text>
@@ -192,7 +195,10 @@ const styles = StyleSheet.create({
   },
   recommenderText: {
     position: "absolute",
-    left: "35%",
+    left: "32%",
+    width: 250,
+    maxWidth: "50%",
+    textAlign: "center",
   },
   toolbarIcons: {
     height: 22,
